@@ -8,11 +8,11 @@ from selenium.common.exceptions import NoAlertPresentException
 import unittest, time, re
 from group import Group
 
-
 class TestAddGroup(unittest.TestCase):
     def setUp(self):
         self.wd = webdriver.Firefox()
         self.wd.implicitly_wait(30)
+
 
     def test_add_group(self):
         wd = self.wd
@@ -23,6 +23,7 @@ class TestAddGroup(unittest.TestCase):
         self.return_to_groups_page(wd)
         self.logout(wd)
 
+
     def test_add_empty_group(self):
         wd = self.wd
         self.open_home_page(wd)
@@ -31,6 +32,7 @@ class TestAddGroup(unittest.TestCase):
         self.create_group(wd, Group(name="", header="", footer=""))
         self.return_to_groups_page(wd)
         self.logout(wd)
+
 
     def logout(self, wd):
         wd.find_element_by_link_text("Logout").click()
@@ -78,6 +80,7 @@ class TestAddGroup(unittest.TestCase):
         try: self.wd.switch_to_alert()
         except NoAlertPresentException as e: return False
         return True
+
 
     def tearDown(self):
         self.wd.quit()

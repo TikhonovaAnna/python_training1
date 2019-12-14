@@ -8,7 +8,7 @@ class ContactHelper:
         wd.get("http://localhost/addressbook/")
 #        wd.find_element_by_link_text("add new").click()
 
-    def add_contact(self, contact):
+    def add(self, contact):
         wd = self.app.wd
         # open contact
         self.open_home_page()

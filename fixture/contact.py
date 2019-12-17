@@ -1,3 +1,5 @@
+from model.contact import Contact
+
 class ContactHelper:
 
     def __init__(self, app):
@@ -19,7 +21,7 @@ class ContactHelper:
         wd.find_element_by_name("firstname").send_keys(contact.firstname)
         wd.find_element_by_name("middlename").click()
         wd.find_element_by_name("middlename").clear()
-        wd.find_element_by_name("middlename").send_keys(contact.dlename)
+        wd.find_element_by_name("middlename").send_keys(contact.middlename)
         wd.find_element_by_name("lastname").click()
         wd.find_element_by_name("lastname").clear()
         wd.find_element_by_name("lastname").send_keys(contact.lastname)
@@ -83,9 +85,38 @@ class ContactHelper:
         wd.find_element_by_xpath("//input[@value='Delete']").click()
         alert = self.app.wd.switch_to_alert()
         alert.accept()
+        del_text = wd.find_element_by_xpath("//div[@class='msgbox']").text
+        assert del_text == 'Record successful deleted'
         # self.app.wd.switch_to_alert.accept()
         # self.return_home_page()
-        wd.get("http://localhost/addressbook/")
+        # wd.get("http://localhost/addressbook/")
+
+    def modify_first_contact(self, contact: Contact):
+        wd = self.app.wd
+        wd.find_element_by_xpath("//img[@alt='Edit']").click()
+        wd.find_element_by_name("firstname").click()
+        wd.find_element_by_name("firstname").clear()
+        wd.find_element_by_name("firstname").send_keys(contact.firstname)
+        wd.find_element_by_xpath("(//input[@name='update'])[2]").click()
+        wd.find_element_by_link_text("home page").click()
+        wd.find_element_by_link_text("Logout").click()
+
+
+
+
+
+        #wd = self.app.wd
+        #wd.get("http://localhost/addressbook/")
+        #wd.find_element_by_name("selected[]").click()
+        #self.open_groups_page()
+        #self.select_first_group()
+        # open modification form
+        #wd.find_element_by_name("edit").click()
+        # fill group form
+        #self.fill_group_form(new_group_date)
+        # submit modification
+        #wd.find_element_by_name("update").click()
+        #self.return_to_groups_page()
 
     def return_home_page(self):
         wd = self.app.wd

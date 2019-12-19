@@ -91,15 +91,34 @@ class ContactHelper:
         # self.return_home_page()
         # wd.get("http://localhost/addressbook/")
 
+    def open_edit(self):
+        self.app.wd.get("http://localhost/addressbook/")
+        self.app.wd.find_element_by_xpath("//img[@alt='Edit']").click()
+
+    def fill_name(self, name):
+        self.app.wd.find_element_by_name("firstname").click()
+        self.app.wd.find_element_by_name("firstname").clear()
+        self.app.wd.find_element_by_name("firstname").send_keys(name)
+
+    def update(self):
+        self.app.wd.find_element_by_xpath("(//input[@name='update'])[2]").click()
+
+    def logout(self):
+        self.app.wd.find_element_by_link_text("home page").click()
+        self.app.wd.find_element_by_link_text("Logout").click()
+
+    # def check(self):
+        # pass
+
     def modify_first_contact(self, contact: Contact):
-        wd = self.app.wd
-        wd.find_element_by_xpath("//img[@alt='Edit']").click()
-        wd.find_element_by_name("firstname").click()
-        wd.find_element_by_name("firstname").clear()
-        wd.find_element_by_name("firstname").send_keys(contact.firstname)
-        wd.find_element_by_xpath("(//input[@name='update'])[2]").click()
-        wd.find_element_by_link_text("home page").click()
-        wd.find_element_by_link_text("Logout").click()
+        self.open_edit()
+        self.fill_name(contact.firstname)
+        self.update()
+        # self.check()
+        self.logout()
+
+
+
 
 
 

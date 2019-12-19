@@ -7,7 +7,7 @@ from model.contact import Contact
 
 
 def test_add_contact(app):
-    for _ in range(5):
+    # for _ in range(5):
         app.open_home_page()
         app.contact.add(Contact(firstname="dsf", middlename="gdfg", lastname="ew", nickname="gdf", title="wer", company="dg",
                                 address="dg", home="dg", mobile="43", work="sdg", fax="213", email="243", email2="234",

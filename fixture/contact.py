@@ -117,13 +117,6 @@ class ContactHelper:
         # self.check()
         self.logout()
 
-
-
-
-
-
-
-
         #wd = self.app.wd
         #wd.get("http://localhost/addressbook/")
         #wd.find_element_by_name("selected[]").click()

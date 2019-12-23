@@ -88,7 +88,8 @@ class ContactHelper:
 
     def modify_first_contact(self, contact: Contact):
         self.open_edit()
-        self.fill_name(contact.firstname)
+        #self.fill_name(contact.firstname)
+        self.fill_contact_form(contact)
         self.update()
         # self.check()
         self.logout()

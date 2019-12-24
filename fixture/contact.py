@@ -1,5 +1,6 @@
 from model.contact import Contact
 
+
 class ContactHelper:
 
     def __init__(self, app):
@@ -7,8 +8,10 @@ class ContactHelper:
 
     def open_home_page(self):
         wd = self.app.wd
-        wd.get("http://localhost/addressbook/")
-#        wd.find_element_by_link_text("add new").click()
+        if not (wd.current_url.endswith("/edit.php") and len(wd.find_elements_by_name("submit")) > 0):
+            wd.find_element_by_link_text("home").click()
+        # wd.get("http://localhost/addressbook/")
+        # wd.find_element_by_link_text("add new").click()
 
     def add(self, contact):
         wd = self.app.wd
@@ -47,7 +50,6 @@ class ContactHelper:
             wd.find_element_by_name(field_name).click()
             wd.find_element_by_name(field_name).clear()
             wd.find_element_by_name(field_name).send_keys(text)
-
 
     def delete_first_contact(self):
         wd = self.app.wd
@@ -88,25 +90,17 @@ class ContactHelper:
 
     def modify_first_contact(self, contact: Contact):
         self.open_edit()
-        #self.fill_name(contact.firstname)
+        # self.fill_name(contact.firstname)
         self.fill_contact_form(contact)
         self.update()
         # self.check()
         self.logout()
 
-        #wd = self.app.wd
-        #wd.get("http://localhost/addressbook/")
-        #wd.find_element_by_name("selected[]").click()
-        #self.open_groups_page()
-        #self.select_first_group()
-        # open modification form
-        #wd.find_element_by_name("edit").click()
-        # fill group form
-        #self.fill_group_form(new_group_date)
-        # submit modification
-        #wd.find_element_by_name("update").click()
-        #self.return_to_groups_page()
-
     def return_home_page(self):
         wd = self.app.wd
         wd.find_element_by_link_text("home page").click()
+
+    def count(self):
+        wd = self.app.wd
+        self.open_home_page()
+        return len(wd.find_elements_by_name("selected[]"))

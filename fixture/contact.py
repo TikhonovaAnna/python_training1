@@ -63,8 +63,8 @@ class ContactHelper:
         wd.find_element_by_xpath("//input[@value='Delete']").click()
         alert = self.app.wd.switch_to_alert()
         alert.accept()
-        del_text = wd.find_element_by_xpath("//div[@class='msgbox']").text
-        assert del_text == 'Record successful deleted'
+        # del_text = wd.find_element_by_xpath("//div[@class='msgbox']").text
+        # assert del_text == 'Record successful deleted'
         # self.app.wd.switch_to_alert.accept()
         # self.return_home_page()
         # wd.get("http://localhost/addressbook/")

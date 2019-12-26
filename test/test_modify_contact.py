@@ -7,6 +7,6 @@ def test_modify_contact(app):
     # data = Contact(firstname="Hello!")
     # import pdb
     # pdb.set_trace()
-    #contact =\
+    #contact =
         app.contact.modify_first_contact(firstname="Hello!")
 

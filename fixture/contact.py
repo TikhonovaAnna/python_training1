@@ -53,13 +53,25 @@ class ContactHelper:
             wd.find_element_by_name(field_name).clear()
             wd.find_element_by_name(field_name).send_keys(text)
 
-    def delete_first_contact(self):
+    def select_first_contact(self):
         wd = self.app.wd
-        # self.open_home_page()
-        wd.get("http://localhost/addressbook/")
-        # select first group
-        # wd.find_element_by_link_text("selected[]").click()
         wd.find_element_by_name("selected[]").click()
+
+    def select_contact_by_index(self, index):
+        wd = self.app.wd
+        wd.find_elements_by_name("selected[]")[index].click()
+
+    def delete_first_contact(self):
+        self.delete_contact_by_index(0)
+
+    def delete_contact_by_index(self, index):
+        wd = self.app.wd
+        self.open_home_page()
+        # wd.get("http://localhost/addressbook/")
+        # select first group
+        self.select_contact_by_index(index)
+        # wd.find_element_by_link_text("selected[]").click()
+        # wd.find_element_by_name("selected[]").click()
         # submit deletion
         # wd.find_element_by_link_text("delete[]").click()
         wd.find_element_by_xpath("//input[@value='Delete']").click()
@@ -91,13 +103,16 @@ class ContactHelper:
     # def check(self):
         # pass
 
-    def modify_first_contact(self, contact: Contact):
+    def modify_first_contact(self):
+        self.modify_contact_by_index(0)
+
+    def modify_contact_by_index(self, index, contact: Contact):
         self.open_edit()
         # self.fill_name(contact.firstname)
         self.fill_contact_form(contact)
         self.update()
         # self.check()
-        self.logout()
+        # self.logout()
 
     def return_home_page(self):
         wd = self.app.wd

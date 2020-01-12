@@ -106,10 +106,14 @@ class ContactHelper:
     def modify_first_contact(self):
         self.modify_contact_by_index(0)
 
-    def modify_contact_by_index(self, index, contact: Contact):
-        self.open_edit()
+    def modify_contact_by_index(self, index, new_contact_data: Contact):
+        wd = self.app.wd
+        # -- self.open_edit()
+        self.open_home_page()
         # self.fill_name(contact.firstname)
-        self.fill_contact_form(contact)
+        # -- self.select_contact_by_index(index)
+        wd.find_elements_by_xpath("//img[@alt='Edit']")[index].click()
+        self.fill_contact_form(new_contact_data)
         self.update()
         # self.check()
         # self.logout()
@@ -131,8 +135,11 @@ class ContactHelper:
             self.open_home_page()
             self.contact_cache = []
             for element in wd.find_elements_by_css_selector("tr[name=entry]"):
-                text = element.text
-                id = element.find_element_by_name("selected[]").get_attribute("value")
-                self.contact_cache.append(Contact(firstname=text, id=id))
+                # -- text = element.text
+                cells = element.find_elements_by_tag_name("td")
+                firstname = cells[1].text
+                lastname = cells[2].text
+                id = cells[0].find_element_by_tag_name("input").get_attribute("value")
+                self.contact_cache.append(Contact(firstname=firstname, lastname=lastname, id=id))
         return list(self.contact_cache)
 

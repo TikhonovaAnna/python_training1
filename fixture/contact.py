@@ -5,6 +5,7 @@ class ContactHelper:
 
     def __init__(self, app):
         self.app = app
+        self.contact_cache = None
 
     def open_home_page(self):
         wd = self.app.wd
@@ -95,6 +96,7 @@ class ContactHelper:
 
     def update(self):
         self.app.wd.find_element_by_xpath("(//input[@name='update'])[2]").click()
+        self.contact_cache = None
 
     def logout(self):
         self.app.wd.find_element_by_link_text("home page").click()
@@ -111,7 +113,9 @@ class ContactHelper:
         # -- self.open_edit()
         self.open_home_page()
         # self.fill_name(contact.firstname)
-        # -- self.select_contact_by_index(index)
+        # import pdb;
+        # pdb.set_trace()
+        # self.select_contact_by_index(index)
         wd.find_elements_by_xpath("//img[@alt='Edit']")[index].click()
         self.fill_contact_form(new_contact_data)
         self.update()
@@ -127,7 +131,7 @@ class ContactHelper:
         self.open_home_page()
         return len(wd.find_elements_by_name("selected[]"))
 
-    contact_cache = None
+    # contact_cache = None
 
     def get_contact_list(self):
         if self.contact_cache is None:

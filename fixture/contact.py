@@ -15,14 +15,14 @@ class ContactHelper:
         # wd.get("http://localhost/addressbook/")
         # wd.find_element_by_link_text("add new").click()
 
-    def open_contact_to_edit_by_index(self, index):
+    def open_contact_to_edit_by_index(self, index):   # открывает форму редактирования контактов
         wd = self.app.wd
         self.open_home_page()
         row = wd.find_elements_by_name("entry")[index]
         cell = row.find_elements_by_tag_name("td")[7]
         cell.find_element_by_tag_name("a").click()
 
-    def open_contact_view_by_index(self, index):
+    def open_contact_view_by_index(self, index):    # открывает стр просмотра детальной инфо о контакте
         wd = self.app.wd
         self.open_home_page()
         row = wd.find_elements_by_name("entry")[index]
@@ -171,7 +171,7 @@ class ContactHelper:
 
     # contact_cache = None
 
-    def get_contact_list(self):
+    def get_contact_list(self):    # метод для загрузки списка, кот читает табл на гл стр приложения и загружает от туда имя и фамилию
         if self.contact_cache is None:
             wd = self.app.wd
             self.open_home_page()

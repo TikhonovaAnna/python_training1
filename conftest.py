@@ -10,6 +10,7 @@ from fixture.db import DbFixture
 fixture = None
 target = None
 
+
 def load_config(file):
     global target
     if target is None:
@@ -23,17 +24,19 @@ def load_config(file):
 def app(request):
     global fixture
     browser = request.config.getoption("--browser")
-    web__config = load_config(request.config.getoption("--target"))['web']
+    web_config = load_config(request.config.getoption("--target"))['web']
     if fixture is None or not fixture.is_valid():
-        fixture = Application(browser=browser, base_url=web__config['baseUrl'])
-    fixture.session.ensure_login(username=web__config['username'], password=web__config['password'])
+        fixture = Application(browser=browser, base_url=web_config['baseUrl'])
+    fixture.session.ensure_login(username=web_config['username'], password=web_config['password'])
     return fixture
 
 
 @pytest.fixture(scope="session")
 def db(request):
-    db__config = load_config(request.config.getoption("--target"))['db']
-    dbfixture - DbFixture(host=db__config['host'], name=db__config['name'], user=db__config['user'], password=db__config['password'])
+    db_config = load_config(request.config.getoption("--target"))['db']
+    dbfixture = DbFixture(host=db_config['host'], name=db_config['name'], user=db_config['user'],
+                          password=db_config['password'])
+
     def fin():
         dbfixture.destroy()
     request.addfinalizer(fin)

@@ -1,4 +1,5 @@
-import pymysql.connection
+# import pymysql.connection
+import pymysql.cursors
 from model.group import Group
 
 
@@ -24,4 +25,4 @@ class DbFixture:
         return list
 
     def destroy(self):
-        self.connectoin.close()
+        self.connection.close()

@@ -8,4 +8,4 @@ try:
     for row in cursor.fetchall():
         print(row)
 finally:
-    connection.close() 
+    connection.close()

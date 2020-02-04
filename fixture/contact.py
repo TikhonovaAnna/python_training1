@@ -70,6 +70,10 @@ class ContactHelper:
         # self.return_to_home_page()
         self.contact_cache = None
 
+    def select_contact_by_id(self, id):
+        wd = self.app.wd
+        wd.find_element_by_css_selector("input[value='%s']" % id).click()
+
     def fill_contact_form(self, contact):
         wd = self.app.wd
         self.change_field_value("firstname", contact.firstname)
@@ -148,6 +152,17 @@ class ContactHelper:
 
     # def check(self):
         # pass
+
+    def delete_contact_by_id(self, id):
+        wd = self.app.wd
+        self.open_home_page()
+        self.select_contact_by_id(id)
+        # submit deletion
+        wd.find_element_by_xpath("//input[@value='Delete']").click()
+        # wd.find_element_by_css_selector('input[value="Delete"]').click()
+        wd.switch_to_alert().accept()
+        self.return_home_page()
+        self.contact_cache = None
 
     def modify_first_contact(self):
         self.modify_contact_by_index(0)

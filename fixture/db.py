@@ -13,8 +13,8 @@ class DbFixture:
         self.password = password
         self.connection = pymysql.connect(host=host, database=name, user=user, password=password, autocommit=True)
 
-    def get_group_list(self):
-        list=[]
+    def get_group_list(self):   # метод, который загружает инфо из БД о группах
+        list = []
         cursor=self.connection.cursor()
         try:
             cursor.execute("select group_id, group_name, group_header, group_footer from group_list")
@@ -25,7 +25,7 @@ class DbFixture:
             cursor.close()
         return list
 
-    def get_contact_list(self):
+    def get_contact_list(self):   # метод, который загружает инфо из БД о контактах
         list = []
         cursor = self.connection.cursor()
         try:

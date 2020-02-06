@@ -38,6 +38,10 @@ class Contact:
         return "%s:%s:%s:%s" % (self.id, self.firstname, self.lastname, self.address)
 
     def __eq__(self, other):
+        if False and self.id and other.id:
+            return self.id == other.id or self.firstname == other.firstname and self.lastname == other.lastname
+        else:
+            return self.firstname == other.firstname and self.lastname == other.lastname
         return (self.id is None or other.id is None or self.id == other.id) or (self.firstname == other.firstname and
                                                                                 self.lastname == other.lastname)
 

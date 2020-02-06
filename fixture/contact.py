@@ -160,11 +160,26 @@ class ContactHelper:
         wd.find_element_by_xpath("//input[@value='Delete']").click()
         # wd.find_element_by_css_selector('input[value="Delete"]').click()
         wd.switch_to_alert().accept()
-        self.return_home_page()
+        wd.find_element_by_css_selector("div.msgbox")
+        #self.return_home_page()
         self.contact_cache = None
 
     def modify_first_contact(self):
         self.modify_contact_by_index(0)
+
+    def modify_contact_by_id(self, id, new_contact_data: Contact):
+        wd = self.app.wd
+        # -- self.open_edit()
+        self.open_home_page()
+        # self.fill_name(contact.firstname)
+        # import pdb;
+        # pdb.set_trace()
+        # self.select_contact_by_index(index)
+        wd.find_element_by_css_selector(f"a[href='edit.php?id={id}']").click()
+        self.fill_contact_form(new_contact_data)
+        self.update()
+        # self.check()
+        # self.logout()
 
     def modify_contact_by_index(self, index, new_contact_data: Contact):
         wd = self.app.wd

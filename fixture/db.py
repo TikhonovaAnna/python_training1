@@ -32,16 +32,31 @@ class DbFixture:
         cursor = self.connection.cursor()
         try:
             # Выполняем запрос
-            cursor.execute("select id, firstname, lastname from addressbook where deprecated='0000-00-00 00:00:00'")
+            cursor.execute("select id, firstname, lastname, email, email2, email3, "
+                           "home, mobile, work from addressbook where deprecated='0000-00-00 00:00:00'")
             # Итерация для строки
             for row in cursor:
                 # Три переменные, в которые помещаются значения из кортежа, соответствующего каждой строке
-                (id, firstname, lastname) = row
+                (id, firstname, lastname, email, email2, email3, home, mobile, work) = row
                 # Создаем контакт с заданным идегтификатороми
-                list.append(Contact(id=str(id), firstname=firstname, lastname=lastname))
+                list.append(Contact(id=str(id), firstname=firstname, lastname=lastname,
+                                    email=email, email2=email2, email3=email3, home=home, mobile=mobile, work=work))
         finally:
             cursor.close()
         return list
+
+#    def get_contact_info_from_edit_page(self, db):
+#        list = []
+#        cursor = self.connection.cursor()
+#        try:
+#            cursor.execute("select id, email, email2, email3 from addressbook where deprecated='0000-00-00 00:00:00'")
+#            for row in cursor:
+#                (id, email, email2, email3) = row
+#                list.append(Contact(id=str(id), email=email, email2=email2, email3=email3))
+#        finally:
+#        cursor.close()
+#    return list
+
 
     def destroy(self):
         self.connection.close()

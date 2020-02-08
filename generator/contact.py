@@ -30,9 +30,12 @@ def random_string(prefix, maxlen):
 
 
 
-testdata = [Contact(firstname="", middlename="", lastname="")] + [
+testdata = [Contact(firstname="", middlename="", lastname="", email="", email2="", email3="",
+                    home="", mobile="", work="")] + [
     Contact(firstname=random_string("firstname", 10), middlename=random_string("middlename", 20),
-          lastname=random_string("flastname", 20))
+            lastname=random_string("flastname", 20), email=random_string("email", 20),
+            email2=random_string("email2", 20), email3=random_string("emails", 20), home=random_string("home", 20),
+            mobile=random_string("mobile", 20), work=random_string("work", 20))
     for i in range(n)
     ]
 

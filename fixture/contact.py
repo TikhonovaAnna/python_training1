@@ -94,6 +94,8 @@ class ContactHelper:
         self.change_field_value("address2", contact.address2)
         self.change_field_value("phone2", contact.phone2)
         self.change_field_value("notes", contact.notes)
+        #self.add_spisok_group("to_group", contact.to_group)
+        #Select(wd.find_element_by_name("to_group")).select_by_visible_text(contact.to_group)
 
     def change_field_value(self, field_name, text):
         wd = self.app.wd
@@ -164,6 +166,17 @@ class ContactHelper:
         #self.return_home_page()
         self.contact_cache = None
 
+    def delete_contact_in_group(self, id):
+        wd = self.app.wd
+        self.open_home_page()
+        wd.find_element_by_name("group").click()
+        #Select(wd.find_element_by_name("group")).select_by_visible_text("name1")
+        wd.find_element_by_xpath("//option[@value='35']").click()
+        wd.find_element_by_name("selected[]").click()
+        wd.find_element_by_name("remove").click()
+        self.return_home_page()
+        self.contact_cache = None
+
     def modify_first_contact(self):
         self.modify_contact_by_index(0)
 
@@ -195,6 +208,22 @@ class ContactHelper:
         # self.check()
         # self.logout()
 
+    def add_contact_in_group(self, id, group_id):
+        wd = self.app.wd
+        # wd.find_elements_by_name("selected[]")[index].click()
+        self.open_home_page()
+        self.select_contact_by_id(id)
+        wd.find_element_by_name("to_group").click()
+        wd.find_element_by_xpath('//select[@name = "to_group"]').click()
+        # Select(wd.find_element_by_name("to_group")).select_by_visible_text("name1")
+        # wd.find_element_by_css_selector('select[name="to_group"]>option[value="%s"]' % group_id)[0].click()
+        wd.find_elements_by_css_selector('select[name="to_group"] > option[value="%s"]' % group_id)[0].click()
+        wd.find_element_by_xpath('//input[@name="add"]').click()
+        # self.select_contact_by_id(id)
+        wd.find_element_by_link_text("/addressbook/").click()
+        #self.return_home_page()
+        self.contact_cache = None
+
     def return_home_page(self):
         wd = self.app.wd
         wd.find_element_by_link_text("home page").click()
@@ -206,7 +235,7 @@ class ContactHelper:
 
     # contact_cache = None
 
-    def get_contact_list(self):    # метод для загрузки списка, кот читает табл на гл стр приложения и загружает от туда имя и фамилию
+    def get_contact_list(self, text):    # метод для загрузки списка, кот читает табл на гл стр приложения и загружает от туда имя и фамилию
         if self.contact_cache is None:
             wd = self.app.wd
             self.open_home_page()

@@ -25,13 +25,19 @@ class DbFixture:
             cursor.close()
         return list
 
-    def get_contact_list(self):   # метод, который загружает инфо из БД о контактах
+    # Метод для загрузки контактов из БД
+    def get_contact_list(self):
         list = []
+        # Получаем курсор
         cursor = self.connection.cursor()
         try:
+            # Выполняем запрос
             cursor.execute("select id, firstname, lastname from addressbook where deprecated='0000-00-00 00:00:00'")
+            # Итерация для строки
             for row in cursor:
+                # Три переменные, в которые помещаются значения из кортежа, соответствующего каждой строке
                 (id, firstname, lastname) = row
+                # Создаем контакт с заданным идегтификатороми
                 list.append(Contact(id=str(id), firstname=firstname, lastname=lastname))
         finally:
             cursor.close()

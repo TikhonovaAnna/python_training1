@@ -41,8 +41,8 @@ class Contact:
         if False and self.id and other.id:
             return self.id == other.id or self.firstname == other.firstname and self.lastname == other.lastname
         else:
-            return self.firstname == other.firstname and self.lastname == other.lastname
-        return (self.id is None or other.id is None or self.id == other.id) or (self.firstname == other.firstname and
+            # return self.firstname == other.firstname and self.lastname == other.lastname
+            return (self.id is None or other.id is None or self.id == other.id) or (self.firstname == other.firstname and
                                                                                 self.lastname == other.lastname)
 
     def id_or_max(self):

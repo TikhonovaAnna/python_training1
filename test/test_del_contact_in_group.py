@@ -1,14 +1,15 @@
 import random
 from model.contact import Contact
+from model.group import Group
 
 
 def test_del_contact_in_group(app, db, check_ui):
-    # выполняем предусловие
+    # Если нет контакта, то добавляем новый
     if len(db.get_group_list()) == 0:
         app.group.create(Group(name="del_contact_in_group"))
     if len(db.get_contact_list()) == 0:
-        app.clcontact.add_contact(Contact(firstname="add_contact_in_group"))
-    # выбираем рандомную группу
+        app.clcontact.add_contact(Contact(firstname="del_contact_in_group"))
+    # Выбираем случайную группу
     old_groups = app.group.get_group_list()
     random_group = random.choice(old_groups)
     contact_not_in_group = db.get_contact_not_in_group(random_group)

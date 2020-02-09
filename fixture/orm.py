@@ -48,16 +48,16 @@ class ORMFixture:
         return list(map(convert, groups))
 
     # Сессия: 1 вариант
-    # @db_session
+    @db_session
     # реалтзовывем ф-ции, которые получают списки объектов
     def get_group_list(self):
         # Этот плок кода должен выполняться в виде сессии. Сессия откр и закр автоматически. 2 вариант
-        with db_session:
+        #with db_session:
             # Делаем выборку из набора объектов соответствующего класса. Выбираются данные
             # из табл и автомат преобразуются в объекты этого класса. В качестве параметра класса передаем
             # конструкцию типалист компрехеншн. Запрос преобразовывем в список из объектов типа ORMGroup в
             # наши модельные объекты
-            return self.convert_groups_to_model(select(g for g in ORMFixture.ORMGroup))
+        return self.convert_groups_to_model(select(g for g in ORMFixture.ORMGroup))
 
     def convert_contacts_to_model(self, contacts):
         def convert(contact):
@@ -71,13 +71,13 @@ class ORMFixture:
             return self.convert_contacts_to_model(select(c for c in ORMFixture.ORMContact if c.deprecated is None))
 
     @db_session
-    # Методод, кот получает список контактов, кот входит в какую-то группу
+    # Метод, кот получает список контактов, кот входит в какую-то группу
     def get_contacts_in_group(self, group):
         orm_group = list(select(g for g in ORMFixture.ORMGroup if g.id == group.id))[0]
         return self.convert_contacts_to_model(orm_group.contacts)
 
     @db_session
-    # Методод, для получения списка контактов, кот не входят в какую-то группу
+    # Метод, для получения списка контактов, кот не входят в какую-то группу
     def get_contacts_not_in_group(self, group):
         orm_group = list(select(g for g in ORMFixture.ORMGroup if g.id == group.id))[0]
         # выбираем все контакты, в которых список групп не содержит заданную группу

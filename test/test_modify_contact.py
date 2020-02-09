@@ -39,4 +39,5 @@ def test_modify_contact(app, db, check_ui):
     assert len(old_contacts) == len(new_contacts)
     assert old_contacts == new_contacts
     if check_ui:
-        assert sorted(new_contacts, key=Contact.id_or_max) == sorted(app.client.get_client_list(), key=Contact.id_or_max)
+        assert sorted(new_contacts, key=Contact.id_or_max) == sorted(app.contacy.get_contact_list(),
+                                                                     key=Contact.id_or_max)

@@ -2,6 +2,7 @@
 import pymysql.cursors
 from model.group import Group
 from model.contact import Contact
+import pymysql.cursors
 
 
 class DbFixture:
@@ -42,6 +43,21 @@ class DbFixture:
         finally:
             cursor.close()
         return list
+
+    def get_contact_in_group(self, group_id):
+        cursor = self.connection.cursor()
+        list = []
+        try:
+            cursor.execute(
+                "select id, group_id from address_in_groups where group_id=?", str(group_id))
+            row = cursor.fetchone()
+            list.append(row)
+        finally:
+            cursor.close()
+        return list
+
+    def get_contact_not_in_group(self, group_id):
+        pass
 
     def destroy(self):
         self.connection.close()

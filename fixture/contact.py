@@ -1,5 +1,6 @@
 from model.contact import Contact
 import re
+from selenium.webdriver.support.ui import Select
 
 
 class ContactHelper:
@@ -57,6 +58,47 @@ class ContactHelper:
         workphone = re.search("W: (.*)", text).group(1)
         secondaryphone = re.search("P: (.*)", text).group(1)
         return Contact(homephone=homephone, mobilephone=mobilephone, workphone=workphone, secondaryphone=secondaryphone)
+
+    def add_contact_to_group(self, contact_id, group_id):
+        wd = self.app.wd
+        self.app.open_home_page()
+        self.select_contact_by_id(contact_id.id)
+        #wd.find_element_by_name("to_group").click()
+        #self.choice_group_by_id(group_id)
+        self.select_group_to_add_by_id(group_id.id)
+        wd.find_element_by_name("add").click()
+        #self.app.open_home_page()
+        self.go_group_page()
+
+    def del_contact_in_group(self, contact_id, group_id):
+        wd = self.app.wd
+        self.app.open_home_page()
+        self.select_group_to_add_by_id(group_id.id)
+        self.select_contact_by_id(contact_id.id)
+        wd.find_element_by_name("remove").click()
+        self.go_group_page()
+
+    def go_group_page(self):
+        wd = self.app.wd
+        if not (wd.current_url.endswith('/group.php') and len(wd.find_elements_by_name("new")) > 0):
+            wd.find_element_by_partial_link_text("group page").click()
+
+    def select_group_to_add_by_id(self, id):
+        wd = self.app.wd
+        wd.find_element_by_css_selector("select[name='to_group']").click()
+        wd.find_element_by_css_selector("select[name='to_group'] option[value='%s']" % id).click()
+
+    def choice_group_by_id(self, id):
+        wd = self.app.wd
+        wd.find_element_by_css_selector("option[value='%s']" % id).click()
+
+    def del_contact_in_group(self, contact_id, group_id):
+        wd = self.app.wd
+        self.app.open_home_page()
+        wd.find_element_by_css_selector("option[value='%s']" % id).click()
+        self.select_contact_by_id(contact_id)
+        wd.find_element_by_name("remove").click()
+        self.app.open_home_page()
 
     def add(self, contact):
         wd = self.app.wd

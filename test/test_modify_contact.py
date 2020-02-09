@@ -25,7 +25,7 @@ from random import randrange, choice
 #    assert old_contacts == new_contacts
     # assert sorted(old_contacts, key=Contact.id_or_max) == sorted(new_contacts, key=Contact.id_or_max)
 
-def test_modify_contact(app, db):
+def test_modify_contact(app, db, check_ui):
     if not db.get_contact_list():
         app.contact.add(Contact(firstname="test"))
     old_contacts = db.get_contact_list()
@@ -38,3 +38,5 @@ def test_modify_contact(app, db):
     new_contacts = db.get_contact_list()
     assert len(old_contacts) == len(new_contacts)
     assert old_contacts == new_contacts
+    if check_ui:
+        assert sorted(new_contacts, key=Contact.id_or_max) == sorted(app.client.get_client_list(), key=Contact.id_or_max)

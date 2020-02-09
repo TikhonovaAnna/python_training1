@@ -2,7 +2,7 @@ from model.group import Group
 from random import randrange, choice
 
 
-def test_modify_group_name(app, db):
+def test_modify_group_name(app, db, check_ui):
     # Проверяем, есть ли группы в базе
     if len(db.get_group_list()) == 0:
         # Если групп нет, создаём новую
@@ -23,6 +23,8 @@ def test_modify_group_name(app, db):
     assert len(old_groups) == len(new_groups)
     # old_contacts[index] = contact
     assert old_groups == new_groups
+    if check_ui:
+        assert sorted(new_groups, key=Group.id_or_max) == sorted(app.group.get_group_list(), key=Group.id_or_max)
 
 
 #def test_modify_group_header(app):

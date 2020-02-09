@@ -56,6 +56,7 @@ def stop(request):
 def check_ui(request):
     return request.config.getoption("--check_ui")
 
+
 def pytest_addoption(parser):
     parser.addoption("--browser", action="store", default="firefox")
     parser.addoption("--target", action="store", default="target.json")

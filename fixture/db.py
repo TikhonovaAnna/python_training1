@@ -57,7 +57,17 @@ class DbFixture:
         return list
 
     def get_contact_not_in_group(self, group_id):
-        pass
+        cursor = self.connection.cursor()
+        list = []
+        try:
+            cursor.execute(
+                "select id, group_id from address_in_groups left join addressbook on id=id"
+                "where group_id is None", str(group_id))
+            row = cursor.fetchone()
+            list.append(row)
+        finally:
+            cursor.close()
+        return list
 
     def destroy(self):
         self.connection.close()

@@ -1,17 +1,10 @@
 import re
-from model.contact import Contact
 
 
-def test_email_on_home_page(app, db, json_contacts):
-    contact = json_contacts
-    old_contacts = db.get_contact_list()
-    #contact_from_home_page = app.contact.get_contact_list(contact)
-
-    new_contacts = db.get_contact_list()
-    assert old_contacts == new_contacts
-    assert sorted(old_contacts, key=Contact.id_or_max) == sorted(new_contacts, key=Contact.id_or_max)
-    assert contact.all_emails_from_home_page == merge_emails_like_on_home_page(contact)
-    assert contact.all_emails_from_home_page == old_contacts
+def test_email_on_home_page(app):
+    contact_from_home_page = app.contact.get_contact_list()[0]
+    contact_from_edit_page = app.contact.get_contact_info_from_edit_page(0)
+    assert contact_from_home_page.all_emails_from_home_page == merge_emails_like_on_home_page(contact_from_edit_page)
 
 
 # def test_emails_on_contact_view_page(app):

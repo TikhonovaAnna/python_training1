@@ -13,13 +13,17 @@ def test_del_contact_in_group(app, db, check_ui):
     old_groups = app.group.get_group_list()
     random_group = random.choice(old_groups)
     contact_not_in_group = db.get_contact_not_in_group(random_group)
+    # ((563,),(643,))
     random_contact = random.choice(contact_not_in_group)
-    if len(db.get_contact_in_group(random_group)) == 0:
-        app.contact.add_contact_to_group(random_contact, random_group)
-    old_contact_in_group = db.get_contact_in_group(random_group)
-    app.contact.del_contact_in_group(random_contact, random_group)
-    new_contact_in_group = db.get_clients_from_group(random_group)
-    assert len(old_contact_in_group) == len(new_contact_in_group) - 1
+    # Выбираем первое поле(id) и полученной в виде tuple информации о контакте (843,)
+    random_contact_id = random_contact[0]
+    if len(db.get_contact_in_group(random_group.id)) == 0:
+        app.contact.add_contact_to_group(random_contact_id, random_group.id)
+    old_contact_in_group = db.get_contact_in_group(random_group.id)
+    assert len(old_contact_in_group) != 0
+    app.contact.del_contact_in_group(random_contact_id, random_group.id)
+    new_contact_in_group = db.get_contact_in_group(random_group.id)
+    assert len(old_contact_in_group) - 1 == len(new_contact_in_group)
 
 
     #contact = random.choice(old_contacts)

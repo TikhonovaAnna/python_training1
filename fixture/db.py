@@ -39,7 +39,7 @@ class DbFixture:
                 # Три переменные, в которые помещаются значения из кортежа, соответствующего каждой строке
                 (id, firstname, lastname) = row
                 # Создаем контакт с заданным идегтификатороми
-                list.append(Contact(id=str(id), firstname=firstname, lastname=lastname))
+                list.append(Contact(id=id, firstname=firstname, lastname=lastname))
         finally:
             cursor.close()
         return list
@@ -49,25 +49,31 @@ class DbFixture:
         list = []
         try:
             cursor.execute(
-                "select id, group_id from address_in_groups where group_id=?", str(group_id))
-            row = cursor.fetchone()
-            list.append(row)
+                "select id, group_id from address_in_groups where group_id=%s",
+                (int(group_id),)
+            )
+            return cursor.fetchall()
+            # row = cursor.fetchone()
+            # list.append(row)
         finally:
             cursor.close()
-        return list
+        # return list
 
     def get_contact_not_in_group(self, group_id):
         cursor = self.connection.cursor()
         list = []
         try:
+            # cursor.execute(
+            #    "select id, group_id from address_in_groups left join addressbook on id=id "
+            #    "where group_id is None", str(group_id))
+            ## select address_in_groups.id, group_id from address_in_groups left join addressbook on address_in_groups.id=addressbook.id where group_id is NULL
             cursor.execute(
-                "select id, group_id from address_in_groups left join addressbook on id=id"
-                "where group_id is None", str(group_id))
-            row = cursor.fetchone()
-            list.append(row)
+                "select ab.id from addressbook ab "
+                "LEFT JOIN address_in_groups ag on ab.id = ag.id where ag.group_id is NULL"
+            )
+            return cursor.fetchall()
         finally:
             cursor.close()
-        return list
 
     def destroy(self):
         self.connection.close()

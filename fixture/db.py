@@ -33,13 +33,15 @@ class DbFixture:
         cursor = self.connection.cursor()
         try:
             # Выполняем запрос
-            cursor.execute("select id, firstname, lastname from addressbook where deprecated='0000-00-00 00:00:00'")
+            cursor.execute("select id, firstname, lastname, email, email2, email3, address from addressbook where deprecated='0000-00-00 00:00:00'")
             # Итерация для строки
             for row in cursor:
                 # Три переменные, в которые помещаются значения из кортежа, соответствующего каждой строке
-                (id, firstname, lastname) = row
+                (id, firstname, lastname, email, email2, email3, address) = row
                 # Создаем контакт с заданным идегтификатороми
-                list.append(Contact(id=id, firstname=firstname, lastname=lastname))
+                list.append(Contact(id=id, firstname=firstname, lastname=lastname,
+                                    email=email, email2=email2, email3=email3,
+                                    address=address))
         finally:
             cursor.close()
         return list

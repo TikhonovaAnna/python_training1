@@ -52,7 +52,7 @@
         <entry file="file://$PROJECT_DIR$/bdd/group_scenarios.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="17">
-              <caret line="1" column="9" lean-forward="true" selection-start-line="1" selection-start-column="9" selection-end-line="1" selection-end-column="21" />
+              <caret line="1" column="11" selection-start-line="1" selection-start-column="11" selection-end-line="1" selection-end-column="11" />
             </state>
           </provider>
         </entry>
@@ -60,7 +60,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/bdd/group_steps.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-272">
+            <state relative-caret-position="136">
+              <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
               <folding>
                 <element signature="e#0#40#0" expanded="true" />
               </folding>
@@ -645,7 +646,21 @@
       <option name="project" value="LOCAL" />
       <updated>1581521330172</updated>
     </task>
-    <option name="localTasksCounter" value="44" />
+    <task id="LOCAL-00044" summary="bdd">
+      <created>1581592263968</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1581592263968</updated>
+    </task>
+    <task id="LOCAL-00045" summary="bdd1">
+      <created>1581592377914</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1581592377914</updated>
+    </task>
+    <option name="localTasksCounter" value="46" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -757,8 +772,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Изменение переменной" />
-    <MESSAGE value="Initial Commit" />
     <MESSAGE value="Выделение методов" />
     <MESSAGE value="Передача параметров в методы" />
     <MESSAGE value="Создание класса contact" />
@@ -782,7 +795,9 @@
     <MESSAGE value="Валидация фикстуры перед каждым тестом" />
     <MESSAGE value="Валидация фикстуры перед каждым тестом. New" />
     <MESSAGE value="requirements added" />
-    <option name="LAST_COMMIT_MESSAGE" value="requirements added" />
+    <MESSAGE value="bdd" />
+    <MESSAGE value="bdd1" />
+    <option name="LAST_COMMIT_MESSAGE" value="bdd1" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/add_contact_2.py" />
@@ -1003,7 +1018,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/bdd/group_steps.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-272">
+        <state relative-caret-position="136">
+          <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
           <folding>
             <element signature="e#0#40#0" expanded="true" />
           </folding>
@@ -1013,7 +1029,7 @@
     <entry file="file://$PROJECT_DIR$/bdd/group_scenarios.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
-          <caret line="1" column="9" lean-forward="true" selection-start-line="1" selection-start-column="9" selection-end-line="1" selection-end-column="21" />
+          <caret line="1" column="11" selection-start-line="1" selection-start-column="11" selection-end-line="1" selection-end-column="11" />
         </state>
       </provider>
     </entry>

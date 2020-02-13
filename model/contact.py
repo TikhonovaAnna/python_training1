@@ -32,7 +32,7 @@ class Contact:
         self.secondaryphone = secondaryphone
         self.all_phones_from_home_page = all_phones_from_home_page
         self.all_emails_from_home_page = all_emails_from_home_page
-        self.id = int(id)
+        self.id = int(id) if id else None
 
     def __repr__(self):
         return "%s:%s:%s:%s" % (self.id, self.firstname, self.lastname, self.address)

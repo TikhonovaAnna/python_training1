@@ -1,5 +1,5 @@
 from pytest_bdd import scenario
-from .groups_steps import *
+from bdd.groups_steps import *
 
 
 @scenario('groups.feature', 'Add new group')

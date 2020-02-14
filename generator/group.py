@@ -24,7 +24,10 @@ for o, a in opts:
 
 
 def random_string(prefix, maxlen):
+    # Символы, кот используются в случайно сгенерированной строке и добавляем 10 пробелов
     symbols = string.ascii_letters + string.digits + string.punctuation + " "*10
+    # Случайным образом выбираем символ из заданной строки. Будет сгенерирована случайная длина,
+    # не превышающая максимальную. Все это превращаем в строку
     return prefix + "".join([random.choice(symbols) for i in range(random.randrange(maxlen))])
 
 

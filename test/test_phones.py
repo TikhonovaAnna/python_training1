@@ -2,7 +2,7 @@ import  re
 from model.contact import Contact
 from random import randrange
 from fixture.db import DbFixture
-
+from test.test_email import merge_emails_like_on_home_page
 
 
 def test_phones_on_home_page(app):
@@ -19,22 +19,22 @@ def test_contact_data_on_db(app, db):
         assert contacts.firstname == contact_from_db.firstname
         assert contacts.lastname == contact_from_db.lastname
         assert contacts.id == contact_from_db.id
-        emails_from_ui = contacts.all_emails_from_home_page.splitlines()
-        emails_from_db = []
-        if contact_from_db.email:
-            emails_from_db.append(contact_from_db.email)
-        if contact_from_db.email2:
-            emails_from_db.append(contact_from_db.email2)
-        if contact_from_db.email3:
-            emails_from_db.append(contact_from_db.email3)
-        assert emails_from_db == emails_from_ui
+        #emails_from_ui = contacts.all_emails_from_home_page.splitlines()
+        # emails_from_db = []
+        # if contact_from_db.email:
+        #     emails_from_db.append(contact_from_db.email)
+        # if contact_from_db.email2:
+        #     emails_from_db.append(contact_from_db.email2)
+        # if contact_from_db.email3:
+        #     emails_from_db.append(contact_from_db.email3)
+        #assert emails_from_db == emails_from_ui
 
-        assert contacts.address == contact_from_db.address
-        # assert contacts.all_phones_from_home_page == merge_phones_like_on_home_page(contact_from_db)
-        #assert contacts.all_emails_from_home_page == merge_emails_like_on_home_page(contact_from_db)
+        #assert contacts.address == contact_from_db.address
+        assert contacts.all_phones_from_home_page == merge_phones_like_on_home_page(contact_from_db)
+        assert contacts.all_emails_from_home_page == merge_emails_like_on_home_page(contact_from_db)
 
 
-#def test_phones_on_contact_view_page(app):
+# def test_phones_on_contact_view_page(app):
 #    contact_from_view_page = app.contact.get_contact_from_view_page(0)
 #    contact_from_edit_page = app.contact.get_contact_info_from_edit_page(0)
 #    assert contact_from_view_page.homephone == contact_from_edit_page.homephone

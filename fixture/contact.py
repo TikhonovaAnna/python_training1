@@ -57,7 +57,8 @@ class ContactHelper:
         mobilephone = re.search("M: (.*)", text).group(1)
         workphone = re.search("W: (.*)", text).group(1)
         secondaryphone = re.search("P: (.*)", text).group(1)
-        return Contact(homephone=homephone, mobilephone=mobilephone, workphone=workphone, secondaryphone=secondaryphone)
+        return Contact(homephone=homephone, mobilephone=mobilephone, workphone=workphone,
+                       secondaryphone=secondaryphone)
 
     def add_contact_to_group(self, contact_id, group_id):
         wd = self.app.wd
